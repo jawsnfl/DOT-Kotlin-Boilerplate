@@ -7,9 +7,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dot.dotkotlinboilerplate.R
 import com.dot.dotkotlinboilerplate.databinding.ItemListPlaceBinding
+import com.dot.dotkotlinboilerplate.menu.listplace.models.ListPlaceResponseModel
 import com.dot.dotkotlinboilerplate.menu.listplace.viewmodels.ItemListPlaceViewModel
 
-class ListPlaceAdapter(private val activity: Activity, private var listPlace: MutableList<ItemListPlaceViewModel>): RecyclerView.Adapter<ListPlaceAdapter.ItemListPlaceViewHolder>() {
+class ListPlaceAdapter(private val activity: Activity, private var listPlace: MutableList<ListPlaceResponseModel.ListPlaceModel>): RecyclerView.Adapter<ListPlaceAdapter.ItemListPlaceViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ItemListPlaceViewHolder {
         val binding: ItemListPlaceBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.item_list_place, parent, false)
@@ -22,9 +23,18 @@ class ListPlaceAdapter(private val activity: Activity, private var listPlace: Mu
 
     override fun onBindViewHolder(holder: ItemListPlaceViewHolder, position: Int) {
         val fixPosition = holder.adapterPosition
-        holder.binding.itemListPlace = listPlace[fixPosition]
-        holder.binding.executePendingBindings()
+        holder.bindBinding(activity, listPlace[fixPosition])
     }
 
-    class ItemListPlaceViewHolder(val binding: ItemListPlaceBinding) : RecyclerView.ViewHolder(binding.root)
+    class ItemListPlaceViewHolder(val binding: ItemListPlaceBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        private lateinit var viewModel: ItemListPlaceViewModel
+
+        fun bindBinding(activity: Activity, model: ListPlaceResponseModel.ListPlaceModel){
+            viewModel = ItemListPlaceViewModel(activity, model)
+            binding.itemListPlace = viewModel
+            binding.executePendingBindings()
+        }
+
+    }
 }

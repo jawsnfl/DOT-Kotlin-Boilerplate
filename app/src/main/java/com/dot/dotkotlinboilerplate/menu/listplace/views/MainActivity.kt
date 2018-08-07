@@ -2,30 +2,25 @@ package com.dot.dotkotlinboilerplate.menu.listplace.views
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import com.dot.dotkotlinboilerplate.R
-import com.dot.dotkotlinboilerplate.data.AppConstants
 import com.dot.dotkotlinboilerplate.databinding.ActivityMainBinding
-import com.dot.dotkotlinboilerplate.menu.listplace.AdapterOnClickListener
 import com.dot.dotkotlinboilerplate.menu.listplace.adapters.ListPlaceAdapter
 import com.dot.dotkotlinboilerplate.menu.listplace.models.ListPlaceResponseModel.ListPlaceModel
 import com.dot.dotkotlinboilerplate.menu.listplace.models.ListPlaceResponseModel
-import com.dot.dotkotlinboilerplate.menu.listplace.viewmodels.ItemListPlaceViewModel
 import com.dot.dotkotlinboilerplate.menu.listplace.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity: AppCompatActivity(), AdapterOnClickListener {
+class MainActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
 
     private lateinit var adapter: ListPlaceAdapter
-    private var listPlace: MutableList<ItemListPlaceViewModel> = mutableListOf()
+    private var listPlace: MutableList<ListPlaceModel> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,20 +71,10 @@ class MainActivity: AppCompatActivity(), AdapterOnClickListener {
 
     private fun onListDataChange(listPlaceResponseModel: ListPlaceResponseModel){
         listPlace.clear()
-        for(i: Int in 0 until listPlaceResponseModel.data.size){
-            val vm = ItemListPlaceViewModel(listPlaceResponseModel.data[i], this)
-            listPlace.add(vm)
-        }
+        listPlace.addAll(listPlaceResponseModel.data)
         recyclerViewMain.post {
             adapter.notifyDataSetChanged()
         }
-    }
-
-    override fun onItemClickListener(listPlaceModel: ListPlaceModel) {
-        Log.d(AppConstants.TAG_DEBUG,"MainActivity # $listPlaceModel")
-        val intent = Intent(this, DetailMainActivity::class.java)
-        intent.putExtra(DetailMainActivity.EXTRA_DATA_LIST, listPlaceModel)
-        startActivity(intent)
     }
 
 }
