@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.dot.dotkotlinboilerplate.R
 import com.dot.dotkotlinboilerplate.databinding.ActivityMainBinding
 import com.dot.dotkotlinboilerplate.menu.listplace.adapters.ListPlaceAdapter
@@ -45,7 +46,10 @@ class MainActivity: AppCompatActivity() {
         binding.main = viewModel
 
         viewModel.listDataResponse.observe(this, Observer {
-            onListDataChange(it!!)
+            onListDataChange(it)
+        })
+        viewModel.error.observe(this, Observer {
+            handlingError(it)
         })
     }
 
@@ -69,12 +73,16 @@ class MainActivity: AppCompatActivity() {
         binding.recyclerViewMain.adapter = adapter
     }
 
-    private fun onListDataChange(listPlaceResponseModel: ListPlaceResponseModel){
+    private fun onListDataChange(listPlaceResponseModel: ListPlaceResponseModel?){
         listPlace.clear()
-        listPlace.addAll(listPlaceResponseModel.data)
+        listPlace.addAll(listPlaceResponseModel?.data!!)
         recyclerViewMain.post {
             adapter.notifyDataSetChanged()
         }
+    }
+
+    private fun handlingError(throwable: Throwable?){
+        Toast.makeText(this, throwable?.message, Toast.LENGTH_SHORT).show()
     }
 
 }
