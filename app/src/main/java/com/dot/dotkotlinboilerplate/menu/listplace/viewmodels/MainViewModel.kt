@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableField
 import com.dot.dotkotlinboilerplate.menu.listplace.models.ListPlaceResponseModel
+import com.dot.dotkotlinboilerplate.networks.ApiObserver
 import com.dot.dotkotlinboilerplate.networks.ServiceFactory
 
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,21 +23,23 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     fun requestListPlace(){
         isLoading.set(true)
-        compositeDisposable.add(
-            apiService.getListPlace()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            {
-                                isLoading.set(false)
-                                listDataResponse.value = it
-                            },
-                            {
-                                isLoading.set(false)
-                                error.value = it
-                            }
-                    )
-        )
+        apiService.getListPlace()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : ApiObserver<ListPlaceResponseModel>(compositeDisposable) {
+                    override fun onApiSuccess(data: ListPlaceResponseModel) {
+                        isLoading.set(false)
+                        listDataResponse.value = data
+                    }
+
+                    override fun onApiError(er: Throwable) {
+                        isLoading.set(false)
+                        error.value = er
+                    }
+
+                })
+
+
     }
 
     fun destroy(){
