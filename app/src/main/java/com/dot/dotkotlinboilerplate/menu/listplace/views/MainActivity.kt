@@ -1,11 +1,11 @@
 package com.dot.dotkotlinboilerplate.menu.listplace.views
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.dot.dotkotlinboilerplate.R
 import com.dot.dotkotlinboilerplate.databinding.ActivityMainBinding
@@ -65,7 +65,7 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun setupRecycler(){
-        val lManager = LinearLayoutManager(this)
+        val lManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         binding.recyclerViewMain.layoutManager = lManager
         binding.recyclerViewMain.setHasFixedSize(true)
 

@@ -1,9 +1,9 @@
 package com.dot.dotkotlinboilerplate.menu.listplace.viewmodels
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MutableLiveData
-import android.databinding.ObservableField
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.databinding.ObservableField
 import com.dot.dotkotlinboilerplate.menu.listplace.models.ListPlaceResponseModel
 import com.dot.dotkotlinboilerplate.networks.ApiObserver
 import com.dot.dotkotlinboilerplate.networks.ServiceFactory

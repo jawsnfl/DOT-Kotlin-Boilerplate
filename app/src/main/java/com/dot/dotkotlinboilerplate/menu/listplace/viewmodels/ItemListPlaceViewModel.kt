@@ -2,7 +2,7 @@ package com.dot.dotkotlinboilerplate.menu.listplace.viewmodels
 
 import android.app.Activity
 import android.content.Intent
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
 import android.view.View
 import com.dot.dotkotlinboilerplate.menu.listplace.models.ListPlaceResponseModel.ListPlaceModel
 import com.dot.dotkotlinboilerplate.menu.listplace.views.DetailMainActivity

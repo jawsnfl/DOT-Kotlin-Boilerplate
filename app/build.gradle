@@ -19,7 +19,7 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode project.versionCode.toInteger()
         versionName project.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", applicationId+"-v"+versionCode+"("+versionName+")")
     }
     buildTypes {
@@ -55,14 +55,13 @@ androidExtensions {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$project.supportLibraryVersion"
-    implementation "com.android.support:design:$project.supportLibraryVersion"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
-    //kapt "com.android.databinding:compiler:$project.dataBindingCompilerVersion"
-    implementation "com.android.support:recyclerview-v7:$project.supportLibraryVersion"
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$project.retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$project.retrofitVersion"
@@ -74,6 +73,6 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$project.glideVersion"
     kapt "com.github.bumptech.glide:compiler:$project.glideVersion"
 
-    implementation "android.arch.lifecycle:extensions:$project.archLifecycleVersion"
-    kapt "android.arch.lifecycle:compiler:$project.archLifecycleVersion"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
 }

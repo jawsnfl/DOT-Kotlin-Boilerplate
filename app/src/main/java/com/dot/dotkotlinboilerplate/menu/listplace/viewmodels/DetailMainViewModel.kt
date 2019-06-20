@@ -1,6 +1,6 @@
 package com.dot.dotkotlinboilerplate.menu.listplace.viewmodels
 
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
 import com.dot.dotkotlinboilerplate.menu.listplace.models.ListPlaceResponseModel
 
 class DetailMainViewModel {
