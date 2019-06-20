@@ -65,7 +65,7 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun setupRecycler(){
-        val lManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        val lManager = LinearLayoutManager(this)
         binding.recyclerViewMain.layoutManager = lManager
         binding.recyclerViewMain.setHasFixedSize(true)
 

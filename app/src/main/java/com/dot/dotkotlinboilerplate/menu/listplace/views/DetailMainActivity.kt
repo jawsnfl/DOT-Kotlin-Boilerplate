@@ -30,7 +30,7 @@ class DetailMainActivity: AppCompatActivity() {
         if (item?.itemId==android.R.id.home) {
             onBackPressed()
         }
-        return super.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item!!)
     }
 
     private fun setupBinding(){
@@ -46,7 +46,7 @@ class DetailMainActivity: AppCompatActivity() {
 
     private fun setupData(){
         if (intent.extras!=null) {
-            val listPlaceModel: ListPlaceResponseModel.ListPlaceModel = intent.getParcelableExtra(EXTRA_DATA_LIST)
+            val listPlaceModel: ListPlaceResponseModel.ListPlaceModel = intent.getParcelableExtra(EXTRA_DATA_LIST)!!
             viewModel.showData(listPlaceModel)
         }
     }
