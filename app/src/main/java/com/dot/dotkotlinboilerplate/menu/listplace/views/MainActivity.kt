@@ -35,11 +35,6 @@ class MainActivity: AppCompatActivity() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.destroy()
-    }
-
     private fun setupBinding(){
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)

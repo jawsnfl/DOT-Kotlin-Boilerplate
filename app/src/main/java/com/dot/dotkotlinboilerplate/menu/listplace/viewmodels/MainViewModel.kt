@@ -42,7 +42,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     }
 
-    fun destroy(){
+    override fun onCleared() {
+        super.onCleared()
         compositeDisposable.clear()
     }
 
