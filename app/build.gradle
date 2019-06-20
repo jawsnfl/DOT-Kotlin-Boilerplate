@@ -61,7 +61,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    kapt "com.android.databinding:compiler:$project.dataBindingCompilerVersion"
+    //kapt "com.android.databinding:compiler:$project.dataBindingCompilerVersion"
     implementation "com.android.support:recyclerview-v7:$project.supportLibraryVersion"
     implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$project.retrofitVersion"
